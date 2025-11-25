@@ -1,5 +1,7 @@
 package com.cakeshop.toppings;
 
-public class Decorator {
-    
+import com.cakeshop.cake.Cake;
+
+public abstract class Decorator extends Cake {
+
 }
