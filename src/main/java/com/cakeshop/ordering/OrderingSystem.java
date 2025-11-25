@@ -4,6 +4,9 @@ import com.cakeshop.*;
 import com.cakeshop.dashbaords.*;
 import com.cakeshop.cake.*;
 import com.cakeshop.factories.*;
+import com.cakeshop.factories.Factory.CakeType;
+import com.cakeshop.factories.ToppingsFactory.ToppingType;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -78,11 +81,11 @@ public class OrderingSystem implements Subject {
     }
 
 
-    public Cake order(String cakeType, String[] toppings) {
+    public Cake order(CakeType cakeType,ArrayList<ToppingType> toppings) {
         Cake cake = factory.createCake(cakeType);
 
-        if (toppings != null && toppings.length > 0) {
-            cake = toppingsFactory.addToppings(cake, toppings);
+         if (toppings != null && !toppings.isEmpty())  {
+            cake = toppingsFactory.addTopping(cake, toppings);
         }
 
         orderNum++;

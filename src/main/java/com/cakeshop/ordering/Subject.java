@@ -1,5 +1,5 @@
 package com.cakeshop.ordering;
-import com.cakeshop.dashbaords.*;;
+import com.cakeshop.dashbaords.*;
 public interface Subject {
     void registerObserver(Dashboard observer);
     void removeObserver(Dashboard observer);
