@@ -1,12 +1,12 @@
-package com.cakeshop.dashbaords;
+package com.cakeshop.dashboards;
 
-public class CustormerDashboard implements Dashboard {
+public class CustomerDashboard implements Dashboard {
 
     private String Name;
     private int OrderNo;
     private String cakeName;
 
-    public CustormerDashboard(String Name) {
+    public CustomerDashboard(String Name) {
         this.Name = Name;
     }
 
@@ -15,7 +15,7 @@ public class CustormerDashboard implements Dashboard {
         this.cakeName = cakeName;
 
         System.out.println("[Customer Dashboard] Hello " + Name +
-                "! Your order is ready: " + cakeName + 
+                "! Your order is ready: " + cakeName +
                 " | Order No: " + orderNo);
     }
 
@@ -26,8 +26,9 @@ public class CustormerDashboard implements Dashboard {
     public int getLastOrderNo() {
         return OrderNo;
     }
-  public String getCakeName() {
+
+    public String getCakeName() {
         return cakeName;
     }
-   
+
 }

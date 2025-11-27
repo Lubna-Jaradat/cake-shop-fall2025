@@ -1,8 +1,13 @@
 package com.cakeshop.ordering;
-import com.cakeshop.dashbaords.*;
+
+import com.cakeshop.dashboards.*;
+
 public interface Subject {
-    void registerObserver(Dashboard observer);
-    void removeObserver(Dashboard observer);
-    void notifyCustomer(String cakeName, int orderNo);
-    void notifyManager(String cakeName, int cakeCount);
+    public void registerObserver(Dashboard observer);
+
+    public void removeObserver(Dashboard observer);
+
+    public void notifyCustomer(String cakeName, int orderNo);
+
+    public void notifyManager(String cakeName, int cakeCount);
 }

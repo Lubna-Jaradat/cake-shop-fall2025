@@ -1,8 +1,7 @@
 package com.cakeshop.ordering;
 
-import com.cakeshop.*;
-import com.cakeshop.dashbaords.*;
 import com.cakeshop.cake.*;
+import com.cakeshop.dashboards.*;
 import com.cakeshop.factories.*;
 import com.cakeshop.factories.Factory.CakeType;
 import com.cakeshop.factories.ToppingsFactory.ToppingType;
@@ -16,22 +15,6 @@ public class OrderingSystem implements Subject {
 
     private static OrderingSystem uniqueInstance;
 
-    private OrderingSystem() {
-        customerObservers = new ArrayList<>();
-        managerObservers = new ArrayList<>();
-        soldCake = new HashMap<>();
-        factory = new CakeFactory();
-        toppingsFactory = new ToppingsFactory();
-    }
-
-    public static synchronized OrderingSystem getInstance() {
-        if (uniqueInstance == null) {
-            uniqueInstance = new OrderingSystem();
-        }
-        return uniqueInstance;
-    }
-
-    
     private final List<Dashboard> customerObservers;
     private final List<Dashboard> managerObservers;
 
@@ -41,25 +24,41 @@ public class OrderingSystem implements Subject {
     private final CakeFactory factory;
     private final ToppingsFactory toppingsFactory;
 
-   
-    public void registerObserver(Dashboard observer) {
-        if (observer instanceof CustormerDashboard) {
-            if (!customerObservers.contains(observer)) customerObservers.add(observer);
-        } else if (observer instanceof ManagerDashboard) {
-            if (!managerObservers.contains(observer)) managerObservers.add(observer);
-        } else {
-            if (!customerObservers.contains(observer)) customerObservers.add(observer);
-            if (!managerObservers.contains(observer)) managerObservers.add(observer);
-        }
+    private OrderingSystem() {
+        customerObservers = new ArrayList<>();
+        managerObservers = new ArrayList<>();
+        soldCake = new HashMap<>();
+        factory = new CakeFactory();
+        toppingsFactory = new ToppingsFactory();
     }
 
-    
+    public static OrderingSystem getInstance() {
+        if (uniqueInstance == null) {
+            synchronized (OrderingSystem.class) {
+                if (uniqueInstance == null) {
+                    uniqueInstance = new OrderingSystem();
+                }
+            }
+        }
+        return uniqueInstance;
+    }
+
+    public void registerObserver(Dashboard observer) {
+        if (observer instanceof CustomerDashboard) {
+            if (!customerObservers.contains(observer))
+                customerObservers.add(observer);
+        } else if  (observer instanceof ManagerDashboard) {
+            if (!managerObservers.contains(observer))
+                managerObservers.add(observer);
+        }
+    }
+   
+
     public void removeObserver(Dashboard observer) {
         customerObservers.remove(observer);
         managerObservers.remove(observer);
     }
 
-    
     public void notifyCustomer(String cakeName, int orderNo) {
         for (Dashboard d : new ArrayList<>(customerObservers)) {
             try {
@@ -80,18 +79,36 @@ public class OrderingSystem implements Subject {
         }
     }
 
-
-    public Cake order(CakeType cakeType,ArrayList<ToppingType> toppings) {
+    public Cake order(CakeType cakeType, ArrayList<ToppingType> toppings) {
         Cake cake = factory.createCake(cakeType);
 
-         if (toppings != null && !toppings.isEmpty())  {
+        if (toppings != null && !toppings.isEmpty()) {
+            String name=cake.getName();
             cake = toppingsFactory.addTopping(cake, toppings);
+            cake.setName(name);
+
         }
 
         orderNum++;
         cake.setOrderNo(orderNum);
 
-        String cakeName = cake.getName(); 
+        String cakeName = cake.getName();
+        soldCake.put(cakeName, soldCake.getOrDefault(cakeName, 0) + 1);
+        int cakeCount = soldCake.get(cakeName);
+
+        notifyCustomer(cakeName, cake.getOrderNo());
+        notifyManager(cakeName, cakeCount);
+
+        return cake;
+    }
+    
+    public Cake order(CakeType cakeType) {
+        Cake cake = factory.createCake(cakeType);
+
+        orderNum++;
+        cake.setOrderNo(orderNum);
+
+        String cakeName = cake.getName();
         soldCake.put(cakeName, soldCake.getOrDefault(cakeName, 0) + 1);
         int cakeCount = soldCake.get(cakeName);
 
@@ -101,11 +118,12 @@ public class OrderingSystem implements Subject {
         return cake;
     }
 
+
     public int getOrderNum() {
         return orderNum;
     }
 
     public Map<String, Integer> getSoldCakeMap() {
-        return new HashMap<>(soldCake);
+        return soldCake;
     }
 }
