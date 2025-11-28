@@ -11,26 +11,31 @@ import com.cakeshop.dashboards.ManagerDashboard;
 
 public class TestDrive {
     public static void main(String[] args) {
+
         System.out.println("Cake Shop Test Drive");
-        OrderingSystem os=OrderingSystem.getInstance();
-        Customer c=new Customer("Rayan",os);
-        ManagerDashboard md=new ManagerDashboard();
-        CustomerDashboard cd=new CustomerDashboard("Lubana");
+
+        OrderingSystem os = OrderingSystem.getInstance();
+        Customer c = new Customer("Rayan", os);
+        ManagerDashboard md = new ManagerDashboard();
+        CustomerDashboard cd = new CustomerDashboard(c);
+
         ArrayList<ToppingsFactory.ToppingType> toppings = new ArrayList<>();
         toppings.add(ToppingsFactory.ToppingType.CHOCOLATE_CHIPS);
         toppings.add(ToppingsFactory.ToppingType.CREAM);
-        toppings.add(ToppingsFactory.ToppingType.CHOCOLATE_CHIPS); 
+        toppings.add(ToppingsFactory.ToppingType.CHOCOLATE_CHIPS);
+
         os.registerObserver(cd);
         os.registerObserver(md);
+
         c.placeOrder(CakeType.APPLE);
         c.placeOrder(CakeType.APPLE);
         c.placeOrder(CakeType.APPLE);
-        c.placeOrder(CakeType.APPLE,toppings);
+        c.placeOrder(CakeType.APPLE, toppings);
+
         System.out.println(c.getName());
         c.placeOrder(CakeType.CHOCOLATE);
-        c.placeOrder(CakeType.CHOCOLATE,toppings);
-        c.placeOrder(CakeType.CHEESE,toppings);
-
+        c.placeOrder(CakeType.CHOCOLATE, toppings);
+        c.placeOrder(CakeType.CHEESE, toppings);
 
     }
 }

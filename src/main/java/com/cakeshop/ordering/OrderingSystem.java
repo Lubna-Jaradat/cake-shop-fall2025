@@ -60,7 +60,7 @@ public class OrderingSystem implements Subject {
     }
 
     public void notifyCustomer(String cakeName, int orderNo) {
-        for (Dashboard d : new ArrayList<>(customerObservers)) {
+        for (Dashboard d : customerObservers) {
             try {
                 d.update(cakeName, orderNo);
             } catch (Exception e) {
@@ -70,7 +70,7 @@ public class OrderingSystem implements Subject {
     }
 
     public void notifyManager(String cakeName, int cakeCount) {
-        for (Dashboard d : new ArrayList<>(managerObservers)) {
+        for (Dashboard d : managerObservers) {
             try {
                 d.update(cakeName, cakeCount);
             } catch (Exception e) {
