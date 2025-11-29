@@ -11,7 +11,7 @@ public class ManagerDashboard implements Dashboard {
         soldCake.put(cakeName, cakeCount);
         
 
-        System.out.println("[Manager Dashboard] Updated Sales: "
+        System.out.println("[Manager Dashboard]  Sales: "
                 + soldCake.toString());
     }
 
