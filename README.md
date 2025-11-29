@@ -2,4 +2,4 @@
 simple cake ordering systems using design patterns
 // semester project
 ## Class Diagram
-<img width="1947" height="716" alt="cakeShop drawio" src="https://github.com/user-attachments/assets/1749a97a-4f69-4bee-8d4d-8e80b4b4de30" />
+<img width="1980" height="736" alt="cakeShop drawio (1)" src="https://github.com/user-attachments/assets/f1195801-8304-4909-9c20-e3f917d914fe" />
