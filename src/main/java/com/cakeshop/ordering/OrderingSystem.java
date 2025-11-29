@@ -19,7 +19,7 @@ public class OrderingSystem implements Subject {
     private final List<Dashboard> managerObservers;
 
     private final Map<String, Integer> soldCake;
-    private int orderNum = 0;
+    private static int orderNum = 0;
 
     private final CakeFactory factory;
     private final ToppingsFactory toppingsFactory;
@@ -83,19 +83,17 @@ public class OrderingSystem implements Subject {
         Cake cake = factory.createCake(cakeType);
 
         if (toppings != null && !toppings.isEmpty()) {
-            String name=cake.getName();
+            String name=cake.getName(); // save name of cake before adding toppings
             cake = toppingsFactory.addTopping(cake, toppings);
-            cake.setName(name);
+            cake.setName(name); // give back original cake name after adding toppings
 
         }
 
         orderNum++;
         cake.setOrderNo(orderNum);
-
         String cakeName = cake.getName();
-        soldCake.put(cakeName, soldCake.getOrDefault(cakeName, 0) + 1);
+        soldCake.put(cakeName, soldCake.getOrDefault(cakeName, 0) + 1); 
         int cakeCount = soldCake.get(cakeName);
-
         notifyCustomer(cakeName, cake.getOrderNo());
         notifyManager(cakeName, cakeCount);
 

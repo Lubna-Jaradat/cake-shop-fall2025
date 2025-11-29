@@ -34,8 +34,13 @@ public class TestDrive {
 
         System.out.println(c.getName());
         c.placeOrder(CakeType.CHOCOLATE);
+<<<<<<< HEAD
         c.placeOrder(CakeType.CHOCOLATE, toppings);
         c.placeOrder(CakeType.CHEESE, toppings);
 
+=======
+        c.placeOrder(CakeType.CHOCOLATE,toppings);
+        c.placeOrder(CakeType.CHEESE,toppings);
+>>>>>>> feature/ordering
     }
 }
