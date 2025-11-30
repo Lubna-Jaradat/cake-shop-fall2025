@@ -2,7 +2,7 @@ package com.cakeshop.toppings;
 
 import com.cakeshop.cake.Cake;
 
-public class Skittles extends Cake {
+public class Skittles extends Decorator {
     Cake cake;
     double price = 1.50;
 
