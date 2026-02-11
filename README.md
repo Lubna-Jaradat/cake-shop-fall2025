@@ -2,9 +2,10 @@
 
 ### School Project  
 Course: Design Patterns  
-
-Instructor: Dr. Thaer Smmar
-
+Instructor: Dr. Thaer Sammar  
+Students:
+- Lubna Jaradat
+- Rayan Awad
 
 ##  Project Overview
 A Java-based cake ordering system developed as a school project implementing key design patterns and object-oriented principles.  
@@ -136,7 +137,9 @@ Simplified interface to complex subsystem
 - `placeOrder()` method coordinates multiple subsystems  
 
 **Complexity Hiding:**  
-- Clients interact with a simple facade instead of 10+ classes  
+- Clients interact with a simple facade instead of 10+ classes
+## Academic Reference
+Head First Design Patterns by Eric Freeman & Elisabeth Freeman
 
 ## Class Diagram
 <img width="1982" height="746" alt="cakeShop drawio (3)" src="https://github.com/user-attachments/assets/47584814-b8d1-4765-aaef-f5fe68251777" />
