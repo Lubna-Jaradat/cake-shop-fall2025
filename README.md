@@ -21,7 +21,6 @@ This system allows customers to customize cakes with **431+ decoration options**
 | **Single Responsibility** | Each class has one clear purpose (e.g., `Customer` → user data, `Order` → order details) |
 | **Open/Closed** | System extensible via new decorators without modifying existing code |
 | **Liskov Substitution** | All decorators are substitutable for `AbstractDecorator` |
-| **Interface Segregation** | Multiple focused interfaces instead of one bloated interface |
 | **Dependency Inversion** | High-level modules depend on abstractions, not concrete implementations |
 
 ---
